@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Taco Crispy';
+    src: url('../../assets/fonts/Taco Crispy.ttf') format('truetype');
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 20px 60px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+.logo-section{
+  display: flex;
+  align-items: center;
+}
+.logo-section img{
+    width: 35px;
+    height: 35px;
+}
+.logo-section h1{
+    margin-left: 10px;
+    font-size: 2em;
+    color: #fff;
+    font-family: 'Taco Crispy';
+    white-space: nowrap;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+}
+
+.navbar li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+    font-family: 'Taco Crispy';
+
+}
+
+.navbar li div {
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+.mobile {
+    display: none;
+}
+
+.mobile svg {
+    height: 1.5em;
+    width: 1.5em;
+    color: #fff;
+    align-items: center;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 769px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        top: 90px;
+        right: -400px;
+        width: 300px;
+        height: 100vh;
+        background: transparent;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+        padding: 40px 0 0 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .navbar-active {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        top: 90px;
+        right: 0;
+        width: 300px;
+        height: 100vh;
+        background: transparent;
+        box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+        padding: 40px 0 0 10px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .navbar li {
+        margin-bottom: 25px;
+    }
+
+    .navbar-active li {
+        margin-bottom: 25px;
+    }
+
+    .mobile {
+        display: block;
+    }
+}
+
+.cnt-btn a {
+    background: #FFE70D;
+    border-radius: 18px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 35px;
+    color: #000000;
+    font-family: 'Taco Crispy';
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.cnt-btn-secondary a {
+    background: #fff;
+    border-radius: 18px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 35px;
+    color: #000000;
+    font-family: 'Taco Crispy';
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.logout svg {
+    color: #FFE70D;
+    font-size: 2em;
+    cursor: pointer;
+}

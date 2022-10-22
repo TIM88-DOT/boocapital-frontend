@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-size: cover;
+  background-position: center center;
+  background-color: #07090B;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+:root {
+  --color-background: #000000;
+  --color-background-rgb: 0, 0, 0;
+
+  --color-primary: #222538;
+  --color-primary-rgb: 34, 37, 56;
+
+  --color-highlight: #343a5c;
+  --color-highlight-rgb: 52, 58, 92;
+}
