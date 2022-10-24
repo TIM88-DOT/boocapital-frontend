@@ -2,29 +2,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_tokenAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_logoUrl",
-				"type": "string"
-			}
-		],
-		"name": "addContender",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_id",
 				"type": "uint256"
@@ -38,13 +15,6 @@
 	{
 		"inputs": [],
 		"name": "endContest",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -85,21 +55,33 @@
 		"type": "event"
 	},
 	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_firstContenderAddress",
-				"type": "address"
+				"internalType": "uint32",
+				"name": "_firstContenderId",
+				"type": "uint32"
 			},
 			{
-				"internalType": "string",
-				"name": "_firstContenderName",
-				"type": "string"
+				"internalType": "uint32",
+				"name": "_secondContenderId",
+				"type": "uint32"
 			},
 			{
-				"internalType": "string",
-				"name": "_firstContenderLogoUrl",
-				"type": "string"
+				"internalType": "uint32",
+				"name": "_thirdContenderId",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "_forthContenderId",
+				"type": "uint32"
 			}
 		],
 		"name": "startContest",
@@ -232,19 +214,9 @@
 					{
 						"components": [
 							{
-								"internalType": "address",
-								"name": "tokenAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "logoUrl",
-								"type": "string"
+								"internalType": "uint32",
+								"name": "id",
+								"type": "uint32"
 							},
 							{
 								"internalType": "uint32",
@@ -290,19 +262,9 @@
 					{
 						"components": [
 							{
-								"internalType": "address",
-								"name": "tokenAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "logoUrl",
-								"type": "string"
+								"internalType": "uint32",
+								"name": "id",
+								"type": "uint32"
 							},
 							{
 								"internalType": "uint32",
@@ -342,19 +304,9 @@
 					{
 						"components": [
 							{
-								"internalType": "address",
-								"name": "tokenAddress",
-								"type": "address"
-							},
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "logoUrl",
-								"type": "string"
+								"internalType": "uint32",
+								"name": "id",
+								"type": "uint32"
 							},
 							{
 								"internalType": "uint32",

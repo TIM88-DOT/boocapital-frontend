@@ -49,7 +49,7 @@
 }
 
 .section:nth-child(2) img {
-    width: 70px;
+    width: 55px;
 }
 
 .winner {
@@ -60,7 +60,7 @@
 }
 
 .winner h1 {
-    font-size: 2.5em;
+    font-size: 2em;
     color: #4D4D4D;
     margin: 0 0 0.3em 0;
 }

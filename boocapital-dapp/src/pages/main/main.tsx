@@ -9,12 +9,12 @@ import useGetRunningContest from "../../hooks/useGetRunningContest";
 import useGetRound from "../../hooks/useGetRound";
 import Contest from "../../entities/Contest.entity";
 import Contender from "../../entities/Contender.entity";
+import useGetContenderData from "../../hooks/useGetContenderData";
 
 export default function Main() {
   const { data: allContests } = useGetContests();
   const { data: currentRound } = useGetRound();
   const { data: currentContest } = useGetRunningContest();
-
 
   useEffect(() => {
     getPreviousContests();
@@ -28,7 +28,7 @@ export default function Main() {
         ? prevContests.push(contest)
         : null
     );
-    console.log(prevContests);
+    console.log("previous",prevContests);
     
     return prevContests;
   };

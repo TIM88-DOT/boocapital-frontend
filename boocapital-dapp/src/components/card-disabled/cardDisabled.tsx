@@ -1,11 +1,16 @@
 import classes from "./cardDisabled.module.css";
 import { useEffect } from "react";
-
+import useGetContenderData from "../../hooks/useGetContenderData";
 
 export default function CardDisabled(props: any) {
+  const contender = useGetContenderData(String(props.winner.id));
+  const  [name,  logoUrl] = [
+    contender?.map((item) => item.name.toString()),
+    contender?.map((item) => item.logoUrl.toString()),
+  ];
   useEffect(() => {
-    console.log("url",props.winner.logoUrl);
-  }, [props]);
+    console.log(contender);
+  }, [contender]);
   return (
     <>
       <div className={classes.main}>
@@ -14,11 +19,11 @@ export default function CardDisabled(props: any) {
           <h1>{props.round}</h1>
         </div>
         <div className={classes.section}>
-            <img src={props.winner.logoUrl} />
-            <div className={classes.winner}>
+          <img src={logoUrl as any} />
+          <div className={classes.winner}>
             <h4>Winner</h4>
-            <h1>{props.winner.name}</h1>
-            </div>
+            <h1>{name}</h1>
+          </div>
         </div>
         <div className={classes.section}>
           <div className={classes["view-btn"]}>
