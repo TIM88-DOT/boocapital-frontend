@@ -1,9 +1,11 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import contestSlice from "./contest/contest.slice";
 import walletSlice from "./wallet/wallet.slice";
 
 export const store = configureStore({
   reducer: {
     wallet: walletSlice,
+    contest: contestSlice
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({

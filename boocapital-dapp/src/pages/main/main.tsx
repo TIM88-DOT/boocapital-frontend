@@ -9,7 +9,6 @@ import useGetRunningContest from "../../hooks/useGetRunningContest";
 import useGetRound from "../../hooks/useGetRound";
 import Contest from "../../entities/Contest.entity";
 import Contender from "../../entities/Contender.entity";
-import useGetContenderData from "../../hooks/useGetContenderData";
 
 export default function Main() {
   const { data: allContests } = useGetContests();
@@ -28,16 +27,13 @@ export default function Main() {
         ? prevContests.push(contest)
         : null
     );
-    console.log("previous",prevContests);
     
-    return prevContests;
+    return prevContests.sort().reverse();
   };
 
   const getWinner = (contest : Contest) => {
    const winner : number = Math.max(...contest.contenders.map(cont => cont.votes));
    const winnerObject : Contender | undefined = contest.contenders.find(res => res.votes==winner);
-    
-    console.log("winner",winnerObject);
     
    return winnerObject;
   };

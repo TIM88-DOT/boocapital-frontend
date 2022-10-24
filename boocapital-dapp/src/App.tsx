@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import Header from './components/header/header';
-import Contest from './pages/contest/contest';
+import Contest from './pages/dashboard/dashboard';
 import Main from './pages/main/main';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       </div>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/aaa" element={<Contest />} />
+          <Route path="/contest" element={<Contest />} />
         </Routes>
       </div>
     </BrowserRouter>

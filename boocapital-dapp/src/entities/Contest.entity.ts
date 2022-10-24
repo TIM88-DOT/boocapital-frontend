@@ -2,13 +2,13 @@ import Contender from "./Contender.entity";
 
 export default class Contest {
   id: number;
+  contenders: Contender[];
   isRunning: boolean;
-  contenders: Contender[]
 
-  constructor(isRunning: boolean, contenders: Contender[], id: number) {
+  constructor(id: number, contenders: Contender[], isRunning: boolean ) {
     this.id = id;
-    this.isRunning = isRunning;
     this.contenders = contenders;
+    this.isRunning = isRunning;
   }
 
 }
