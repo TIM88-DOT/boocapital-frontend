@@ -1,0 +1,43 @@
+.main {
+    width: 100%;
+    margin: 3% 5%;
+    display: flex;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    background: #2D2C2E;
+    border-radius: 23px 23px;
+    padding-bottom: 20px;
+    width: 65%;
+    margin: auto auto auto 15px;
+}
+
+.prize-container {
+    background: #2D2C2E;
+    border-radius: 23px 23px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+}
+
+.prize-container img {
+    width: auto;
+}
+
+.prize-container h4 {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.claim-btn {
+    padding: 10px 30px;
+    margin-top: 20px;
+    background: linear-gradient(358.62deg, #DE9F17 1.11%, #CF9A15 30.61%, #FFF68A 63.67%, #FFCF45 95.71%);
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1em;
+}
