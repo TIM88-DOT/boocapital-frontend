@@ -10,7 +10,7 @@ import { useWalletConnect } from "./useWalletConnect";
 function walletOfOwner(contract: Contract | null) {
     const { account } = useWalletConnect();
 
-    return async (_: number) => {
+    return async (_: number[]) => {
         const balance = <Array<number>>contract?.methods.walletOfOwner(account).call();
         return balance;
     };

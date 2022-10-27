@@ -18,6 +18,8 @@ export const useWalletConnect = () => {
             const _provider = _web3.currentProvider;
             const _account = res[0];
             const _chainId = await _web3.eth.getChainId();
+            console.log(_chainId);
+            
             dispatch(setConnection({ _web3, _provider, _account, _chainId }))
             handleProviderChanged(_provider)
         } catch (e) {

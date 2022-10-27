@@ -9,35 +9,39 @@ import useGetRunningContest from "../../hooks/useGetRunningContest";
 import useGetRound from "../../hooks/useGetRound";
 import Contest from "../../entities/Contest.entity";
 import Contender from "../../entities/Contender.entity";
+import { useAppSelector } from "../../hooks/useReduxHook";
 
 export default function Main() {
   const { data: allContests } = useGetContests();
   const { data: currentRound } = useGetRound();
   const { data: currentContest } = useGetRunningContest();
+  const chainId: any = useAppSelector((state) => state.wallet.chainId);
 
   useEffect(() => {
     getPreviousContests();
-    
   }, [allContests]);
 
   const getPreviousContests = () => {
-  const prevContests: Contest[] = [];
+    const prevContests: Contest[] = [];
     allContests?.map((contest: Contest) =>
       contest.isRunning === false && contest.contenders.length > 0
         ? prevContests.push(contest)
         : null
     );
-    
+
     return prevContests.sort().reverse();
   };
 
-  const getWinner = (contest : Contest) => {
-   const winner : number = Math.max(...contest.contenders.map(cont => cont.votes));
-   const winnerObject : Contender | undefined = contest.contenders.find(res => res.votes==winner);
-    
-   return winnerObject;
-  };
+  const getWinner = (contest: Contest) => {
+    const winner: number = Math.max(
+      ...contest.contenders.map((cont) => cont.votes)
+    );
+    const winnerObject: Contender | undefined = contest.contenders.find(
+      (res) => res.votes == winner
+    );
 
+    return winnerObject;
+  };
 
   return (
     <>
@@ -51,22 +55,34 @@ export default function Main() {
           </p>
         </div>
         <div className={classes.right}>
-          <div className={classes.header}>
-            <h4>
-              Active <span>Boo-It!</span>
-            </h4>
-          </div>
-          {currentContest?.isRunning && (
-            <Card contest={currentContest} round={currentRound} />
+          {chainId != 97 ? (
+            <div className={classes.header}>
+              <h4>Please connect to BSC Testnet (97)</h4>
+            </div>
+          ) : (
+            <div>
+              <div className={classes.header}>
+                <h4>
+                  Active <span>Boo-It!</span>
+                </h4>
+              </div>
+              {currentContest?.isRunning && (
+                <Card contest={currentContest} round={currentRound} />
+              )}
+              <div className={classes.header}>
+                <h4 style={{ marginTop: "50px" }}>
+                  Previous <span>Boo-It!</span>
+                </h4>
+              </div>
+              {getPreviousContests()?.map((contest: Contest) => (
+                <CardDisabled
+                  winner={getWinner(contest)}
+                  round={contest.id}
+                  key={contest.id}
+                />
+              ))}
+            </div>
           )}
-          <div className={classes.header}>
-            <h4 style={{ marginTop: "50px" }}>
-              Previous <span>Boo-It!</span>
-            </h4>
-          </div>
-          {getPreviousContests()?.map((contest: Contest) => (
-            <CardDisabled winner={getWinner(contest)} round={contest.id} key={contest.id}/>
-          ))}
         </div>
       </div>
     </>
