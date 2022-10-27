@@ -149,6 +149,7 @@
 }
 .logos img{
     margin-left: 2%;
+    cursor: pointer;
 }
 
 .view-btn a {

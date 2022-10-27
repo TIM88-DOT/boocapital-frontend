@@ -15,7 +15,7 @@ export default function Card(props: any) {
   ];
   const onOpenDetails = () =>{
     dispatch(setContest({ _id, _contenders, _isRunning }));
-    navigate("contest");
+    navigate(`contest/${_id}`);
   }
 
   return (

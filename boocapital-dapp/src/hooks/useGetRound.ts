@@ -1,8 +1,8 @@
 import { Contract } from "ethers";
 import useSWR from "swr";
 import * as constants from "../constants/consts";
-import VOTE_ABI from "../abi/votecontract-abi.json";
-import useGetVoteContract from "../hooks/useGetVoteContract";
+import VOTE_ABI from "../abi/vote-contract-abi.json";
+import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
 
 
@@ -18,7 +18,7 @@ function count(contract: Contract | null) {
 export default function useGetRound(
   suspense = false
 ) {
-  const voteContract = useGetVoteContract(constants.VOTING_CONTRACT_ADDRESS, VOTE_ABI);
+  const voteContract = useGetContract(constants.VOTING_CONTRACT_ADDRESS, VOTE_ABI);
 
   const shouldFetch = !!voteContract;
 

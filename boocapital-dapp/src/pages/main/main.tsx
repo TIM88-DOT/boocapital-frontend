@@ -65,7 +65,7 @@ export default function Main() {
             </h4>
           </div>
           {getPreviousContests()?.map((contest: Contest) => (
-            <CardDisabled winner={getWinner(contest)} round={contest.id}/>
+            <CardDisabled winner={getWinner(contest)} round={contest.id} key={contest.id}/>
           ))}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import classes from "./cardDisabled.module.css";
-import { useEffect } from "react";
 import useGetContenderData from "../../hooks/useGetContenderData";
 
 export default function CardDisabled(props: any) {
@@ -8,9 +7,7 @@ export default function CardDisabled(props: any) {
     contender?.map((item) => item.name.toString()),
     contender?.map((item) => item.logoUrl.toString()),
   ];
-  useEffect(() => {
-    console.log(contender);
-  }, [contender]);
+
   return (
     <>
       <div className={classes.main}>

@@ -15,7 +15,7 @@ function App() {
       </div>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/contest" element={<Contest />} />
+          <Route path="/contest/:id" element={<Contest />} />
         </Routes>
       </div>
     </BrowserRouter>
