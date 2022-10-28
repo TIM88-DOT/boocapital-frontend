@@ -211,5 +211,10 @@
     flex-direction: column;
 }
 
+.view-btn a {
+    padding: 4px 8px;
+    font-size: 0.7em;
+    margin-right: 5px;
+}
 
 }
