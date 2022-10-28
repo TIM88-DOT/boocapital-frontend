@@ -7,7 +7,7 @@
 
 .container {
     background: #2D2C2E;
-    border-radius: 23px 23px;
+    border-radius: 23px;
     padding-bottom: 20px;
     width: 64%;
     margin: auto auto auto 15px;
@@ -15,7 +15,7 @@
 
 .prize-container {
     background: #2D2C2E;
-    border-radius: 23px 23px;
+    border-radius: 23px;
     padding-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -40,4 +40,22 @@
     border-radius: 25px;
     font-weight: 600;
     font-size: 1em;
+}
+
+@media screen and (max-width: 769px) {
+    .main {
+        flex-direction: column-reverse;
+        margin: 0;
+    }
+
+    .container {
+        width: 90%;
+        margin: 3% auto;
+    }
+
+    .prize-container {
+        width: 75%;
+        margin: auto;
+        margin-block: 1em;
+    }
 }

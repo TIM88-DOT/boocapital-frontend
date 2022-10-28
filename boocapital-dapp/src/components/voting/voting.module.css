@@ -1,6 +1,7 @@
 .container{
     display: flex;
     width: 100%;
+    margin: auto;
 }
 
 
@@ -31,7 +32,6 @@
     position: relative;
     height: 100%;
     max-width: 110px;
-
 }
 
 
@@ -89,6 +89,7 @@
     color: #160424;
     margin-block: 5px;
     font-size: 0.7em;
+    line-break: anywhere;
 }
 
 
@@ -121,6 +122,7 @@
 .item:nth-child(1) h4 {
     margin: 0;
     color: #160424;
+    text-align: center;
 }
 
 .item:nth-child(2) {
@@ -131,7 +133,7 @@
     align-self: auto;
     background: #fff;
     height: 100px;
-    width: 89%;
+    width: 70%;
     margin-left: 10px;
     justify-content: space-between;
     border-top-right-radius: 20px;
@@ -166,3 +168,48 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 769px) {
+.left{
+    width: 50%;
+}
+.section:nth-child(1) {
+    max-width: 40px
+}
+.section:nth-child(1) h1 {
+    font-size: 1.2em;
+}
+
+.section:nth-child(2) {
+    max-width: 40px
+}
+.section:nth-child(2) img {
+    margin-right: 10px;
+    width: 30px;
+}
+.section:nth-child(3) p {
+    font-size: 0.7em;
+    line-break: anywhere;
+}
+
+.right {
+    width: 50%;
+}
+
+.item:nth-child(1) {
+    width: 45%;
+}
+
+.item:nth-child(2) img {
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+    margin-block: 5px
+}
+
+.logos{
+    display: flex;
+    flex-direction: column;
+}
+
+
+}

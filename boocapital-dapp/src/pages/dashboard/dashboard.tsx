@@ -10,7 +10,7 @@ export default function Dashboard() {
   return (
     <>
       <Info />
-      <div className={classes.main}>
+      <main className={classes.main}>
       <div className={classes["prize-container"]}>
           <h4>CLAIM VOTED WINNERS</h4>
           <img src={logo} />
@@ -21,7 +21,7 @@ export default function Dashboard() {
         <div className={classes.container}>
           <Voting />
         </div>
-      </div>
+      </main>
     </>
   );
 }
