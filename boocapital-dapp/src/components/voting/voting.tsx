@@ -8,9 +8,8 @@ import Checkbox from "@mui/material/Checkbox";
 
 import classes from "./voting.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import useGetContenderData from "../../hooks/useGetContenderData";
 import { useAppSelector } from "../../hooks/useReduxHook";
 import useGetContract from "../../hooks/useGetContract";
 import { useWalletConnect } from "../../hooks/useWalletConnect";
@@ -25,18 +24,50 @@ import download from "../../assets/images/download.png";
 import useGetNftBalance from "../../hooks/useGetNftBalance";
 import ListItemText from "@mui/material/ListItemText";
 import { List, ListItem, ListItemButton } from "@mui/material";
+import useGetUsedNfts from "../../hooks/useGetUsedNfts";
+import useGetRunningContest from "../../hooks/useGetRunningContest";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  orderBy,
+  limitToLast,
+} from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+  apiKey: "AIzaSyAxfxJ_o8Qd8-yxgahpm0V4-vxcxVfxJIw",
+  authDomain: "boo-it.firebaseapp.com",
+  projectId: "boo-it",
+  storageBucket: "boo-it.appspot.com",
+  messagingSenderId: "436077767040",
+  appId: "1:436077767040:web:b454fc826316c97d3db965",
+  measurementId: "G-3R9D6W7M1P",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const contendersRef = collection(db, "contenders");
 
 export default function Voting() {
-  const contenders: Contender[] | null = useAppSelector<Contender[] | null>(
-    (state) => state.contest.contenders
-  );
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState<number[]>([]);
+  const [availableNfts, setAvailableNfts] = useState<number[] | undefined>([]);
+  const [contestId, setContestId] = useState<number>();
+  const [contenders, setContenders] = useState<Contender[] | undefined>([]);
 
   const { account } = useWalletConnect();
+  const { data: nftBalance } = useGetNftBalance();
+  const { data: usedNfts } = useGetUsedNfts(contestId as number);
+  const { data: currentContest } = useGetRunningContest();
 
   const [selectedContenderIndex, setSelectedContenderIndex] =
     useState<number>();
+
+  const q = query(contendersRef, orderBy("id"), limitToLast(100));
+  const contenderDetails = useCollectionData(q)[0] as Contender[];
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -47,26 +78,17 @@ export default function Voting() {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-    console.log(newChecked);
-
     setChecked(newChecked);
   };
 
   //simple way to sort the contenders
   let contenderCounts = 0;
 
-  const { data: nftBalance } = useGetNftBalance();
   const count = () => {
     contenderCounts++;
     return contenderCounts;
   };
 
-  const getData = (contender: Contender) => {
-    const cont = useGetContenderData(contender?.id);
-    if (cont) {
-      return cont[0];
-    }
-  };
   const voteContract = useGetContract(
     constants.VOTING_CONTRACT_ADDRESS,
     VOTE_ABI
@@ -100,6 +122,23 @@ export default function Voting() {
     setOpen(false);
   };
 
+  const getData = (contenderId: string) => {
+    const arr = contenderDetails?.find((r) => contenderId == r.id) as Contender;
+    console.log(arr);
+    return arr;
+  };
+  useEffect(() => {
+    const availabNFTs = nftBalance?.filter((n) => !usedNfts?.includes(n));
+    setAvailableNfts(availabNFTs);
+  }, [usedNfts, nftBalance]);
+
+  useEffect(() => {
+    setContestId(currentContest?.id);
+    const currentContenders = currentContest?.contenders;
+
+    setContenders(currentContenders);
+  }, [currentContest]);
+
   return (
     <>
       {contenders
@@ -113,11 +152,11 @@ export default function Voting() {
                 <h1>#{count()}</h1>
               </div>
               <div className={classes.section}>
-                <img src={getData(contender)?.logoUrl as any} />
+                <img src={getData(contender.id)?.logoUrl as any} />
               </div>
               <div className={classes.section}>
-                <h4>{getData(contender)?.name}</h4>
-                <p>{getData(contender)?.tokenAddress}</p>
+                <h4>{getData(contender.id)?.name}</h4>
+                <p>{getData(contender.id)?.tokenAddress}</p>
               </div>
             </div>
 
@@ -162,7 +201,7 @@ export default function Voting() {
                       bgcolor: "background.paper",
                     }}
                   >
-                    {nftBalance?.map((value) => {
+                    {availableNfts?.map((value) => {
                       const labelId = `checkbox-list-label-${value}`;
 
                       return (

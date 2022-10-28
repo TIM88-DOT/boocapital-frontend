@@ -4,12 +4,13 @@ import * as constants from "../constants/consts";
 import VOTE_ABI from "../abi/vote-contract-abi.json";
 import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
+import Contest from "../entities/Contest.entity";
 
 
 
 function getCurrentContest(contract: Contract | null) {
-  return async (_: any) => {
-    const contests = await contract?.methods.getCurrentContest().call();
+  return async (_: Contest) => {
+    const contests = await <Contest>contract?.methods.getCurrentContest().call();
 
     return contests;
   };
@@ -22,7 +23,7 @@ export default function useGetRunningContest(
 
   const shouldFetch = !!voteContract;
 
-  const result: any = useSWR(shouldFetch ? ["getCurrentContest"] : null, getCurrentContest(voteContract), {
+  const result = useSWR<Contest>(shouldFetch ? ["getCurrentContest"] : null, getCurrentContest(voteContract), {
     suspense,
   });
 
