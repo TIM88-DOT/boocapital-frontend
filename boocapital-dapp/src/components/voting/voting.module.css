@@ -97,7 +97,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    width: 40%;
+    width: 45%;
     margin-right: 2%;
     justify-content: flex-end;
     height: 100px;
@@ -133,7 +133,7 @@
     align-self: auto;
     background: #fff;
     height: 100px;
-    width: 70%;
+    width: 65%;
     margin-left: 10px;
     justify-content: space-between;
     border-top-right-radius: 20px;
@@ -164,7 +164,7 @@
     color: #562E76;
     font-family: 'Inter', sans-serif;
     text-decoration: none;
-    margin-right: 10px;
+    margin-inline: 15px;
     cursor: pointer;
 }
 
