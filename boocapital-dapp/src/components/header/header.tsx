@@ -3,11 +3,14 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import classes from "./header.module.css";
 import logo from "../../assets/images/LOGO.png";
-import { useWalletConnect } from "../../hooks/useWalletConnect";
+import { useWalletConnectModal } from "../../hooks/useWalletConnectModal";
+
 
 export default function Header() {
   const [activeClass, setActiveClass] = useState(false);
-  const { account, onConnect, onDisconnect } = useWalletConnect();
+  const { account, onConnect, onDisconnect } = useWalletConnectModal();
+  console.log(account);
+  
   const navClass = activeClass ? "navbar-active" : "navbar";
   const toggleActive = () => {
     activeClass ? setActiveClass(false) : setActiveClass(true);
@@ -43,8 +46,9 @@ export default function Header() {
           </li>
           <li>
             <a className={classes.logout} onClick={(e) => {
-                        e.preventDefault();
-                        onDisconnect()}}>
+                        e.preventDefault()
+                        onDisconnect()
+                      }}>
               <FiLogOut />
             </a>
           </li>

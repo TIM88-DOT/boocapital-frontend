@@ -1,12 +1,12 @@
 import { Contract } from "ethers";
 import { useMemo } from "react";
-import { useWalletConnect } from "./useWalletConnect";
+import { useWalletConnectModal } from "./useWalletConnectModal";
 
 export default function useContract<T extends Contract = Contract>(
     address: string,
     ABI: any
   ): T | null {
-    const { web3, account } = useWalletConnect()
+    const { web3, account } = useWalletConnectModal()
 
     return useMemo(() => {
         if (!address || !ABI || !web3 ) {

@@ -4,11 +4,12 @@ import * as constants from "../constants/consts";
 import NFT_ABI from "../abi/nft-contract-abi.json";
 import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
-import { useWalletConnect } from "./useWalletConnect";
+import { useWalletConnectModal } from "./useWalletConnectModal";
 
 
 function walletOfOwner(contract: Contract | null) {
-    const { account } = useWalletConnect();
+    const { account } = useWalletConnectModal();
+
 
     return async (_: number[]) => {
         const balance = <Array<number>>contract?.methods.walletOfOwner(account).call();

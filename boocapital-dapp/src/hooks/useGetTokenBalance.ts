@@ -4,11 +4,11 @@ import * as constants from "../constants/consts";
 import TOKEN_ABI from "../abi/token-contract-abi.json";
 import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
-import { useWalletConnect } from "./useWalletConnect";
+import { useWalletConnectModal } from "./useWalletConnectModal";
 
 
 function getBalance(contract: Contract | null) {
-    const { account } = useWalletConnect();
+    const { account } = useWalletConnectModal();
 
     return async (_: any) => {
         const balance = contract?.methods.balanceOf(account).call();

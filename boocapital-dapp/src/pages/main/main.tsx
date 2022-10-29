@@ -10,12 +10,13 @@ import useGetRound from "../../hooks/useGetRound";
 import Contest from "../../entities/Contest.entity";
 import Contender from "../../entities/Contender.entity";
 import { useAppSelector } from "../../hooks/useReduxHook";
+import { useWalletConnectModal } from "../../hooks/useWalletConnectModal";
 
 export default function Main() {
   const { data: allContests } = useGetContests();
   const { data: currentRound } = useGetRound();
   const { data: currentContest } = useGetRunningContest();
-  const chainId: any = useAppSelector((state) => state.wallet.chainId);
+  const {chainId} = useWalletConnectModal();
 
   useEffect(() => {
     getPreviousContests();

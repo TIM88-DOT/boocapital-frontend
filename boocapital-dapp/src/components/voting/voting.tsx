@@ -10,9 +10,11 @@ import classes from "./voting.module.css";
 
 import { useEffect, useState } from "react";
 
-import { useAppSelector } from "../../hooks/useReduxHook";
 import useGetContract from "../../hooks/useGetContract";
-import { useWalletConnect } from "../../hooks/useWalletConnect";
+import useGetNftBalance from "../../hooks/useGetNftBalance";
+import useGetUsedNfts from "../../hooks/useGetUsedNfts";
+import useGetRunningContest from "../../hooks/useGetRunningContest";
+import { useWalletConnectModal } from "../../hooks/useWalletConnectModal";
 
 import VOTE_ABI from "../../abi/vote-contract-abi.json";
 
@@ -21,11 +23,9 @@ import * as constants from "../../constants/consts";
 import globeLogo from "../../assets/images/globe.png";
 import user from "../../assets/images/person.png";
 import download from "../../assets/images/download.png";
-import useGetNftBalance from "../../hooks/useGetNftBalance";
 import ListItemText from "@mui/material/ListItemText";
 import { List, ListItem, ListItemButton } from "@mui/material";
-import useGetUsedNfts from "../../hooks/useGetUsedNfts";
-import useGetRunningContest from "../../hooks/useGetRunningContest";
+
 
 import {
   getFirestore,
@@ -37,6 +37,7 @@ import {
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeApp } from "firebase/app";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAxfxJ_o8Qd8-yxgahpm0V4-vxcxVfxJIw",
   authDomain: "boo-it.firebaseapp.com",
@@ -58,7 +59,7 @@ export default function Voting() {
   const [contestId, setContestId] = useState<number>();
   const [contenders, setContenders] = useState<Contender[] | undefined>([]);
 
-  const { account } = useWalletConnect();
+  const { account } = useWalletConnectModal();
   const { data: nftBalance } = useGetNftBalance();
   const { data: usedNfts } = useGetUsedNfts(contestId as number);
   const { data: currentContest } = useGetRunningContest();

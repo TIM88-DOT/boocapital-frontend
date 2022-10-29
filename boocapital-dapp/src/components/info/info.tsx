@@ -19,7 +19,9 @@ export default function Info() {
 
   useEffect(() => {
     let tokenVotePower = 0;
-    hasVoted ? (tokenVotePower = 0) : (tokenVotePower = 1);
+    if (hasVoted) {
+      hasVoted ? (tokenVotePower = 0) : (tokenVotePower = 1);
+    }
     if (nftBalance) {
       setTotalVotingPower(nftBalance.length + tokenVotePower);
     }
