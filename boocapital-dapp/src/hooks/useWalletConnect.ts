@@ -7,7 +7,7 @@ import { setConnection } from "../redux/wallet/wallet.slice";
 import { useAppDispatch, useAppSelector } from "./useReduxHook";
 
 
-export const useWalletConnectModal = () => {
+export const useWalletConnect = () => {
     const [connected, setConnected] = useState(false);
     
     const account = useAppSelector((state) => state.wallet.account);
@@ -20,9 +20,9 @@ export const useWalletConnectModal = () => {
         walletconnect: {
             package: WalletConnectProvider, // required
             options: {
-                chainId: 56,
+                chainId: 97,
                 rpc: {
-                    56: "https://bsc-dataseed1.ninicoin.io",
+                    97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
                 },
             },
         },
@@ -38,30 +38,33 @@ export const useWalletConnectModal = () => {
     };
 
     const web3Modal = new Web3Modal({
-        cacheProvider: false, // optional
+        cacheProvider: true, // optional
         providerOptions, // required
     });
     const handleConnection = async () => {
+       try {
         if (connected) {
-            web3Modal.clearCachedProvider();
             window.location.reload();
             setConnected(false);
         } else {
             const connection = await web3Modal.connect();
             const _provider = new ethers.providers.Web3Provider(connection);
+            await _provider.send("eth_requestAccounts", []);
             handleProviderChanged(_provider);
             const _web3 = new Web3(connection);
-            await _provider.send("eth_requestAccounts", []);
             const _account = await _provider.getSigner().getAddress();
             const _chainId = await _provider.getSigner().getChainId();
-            setConnected(true);
             dispatch(setConnection({ _web3, _provider, _account, _chainId }))
+            setConnected(true);
         }
+       } catch (error) {
+        console.log(error);
+       } 
+      
     }
 
     const disconnect = async () => {
         if (connected) {
-            web3Modal.clearCachedProvider();
             window.location.reload();
             setConnected(false);
         }

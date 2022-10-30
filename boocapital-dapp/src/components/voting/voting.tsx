@@ -14,7 +14,7 @@ import useGetContract from "../../hooks/useGetContract";
 import useGetNftBalance from "../../hooks/useGetNftBalance";
 import useGetUsedNfts from "../../hooks/useGetUsedNfts";
 import useGetRunningContest from "../../hooks/useGetRunningContest";
-import { useWalletConnectModal } from "../../hooks/useWalletConnectModal";
+import { useWalletConnect } from "../../hooks/useWalletConnect";
 
 import VOTE_ABI from "../../abi/vote-contract-abi.json";
 
@@ -59,7 +59,7 @@ export default function Voting() {
   const [contestId, setContestId] = useState<number>();
   const [contenders, setContenders] = useState<Contender[] | undefined>([]);
 
-  const { account } = useWalletConnectModal();
+  const { account } = useWalletConnect();
   const { data: nftBalance } = useGetNftBalance();
   const { data: usedNfts } = useGetUsedNfts(contestId as number);
   const { data: currentContest } = useGetRunningContest();

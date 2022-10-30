@@ -3,12 +3,12 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import classes from "./header.module.css";
 import logo from "../../assets/images/LOGO.png";
-import { useWalletConnectModal } from "../../hooks/useWalletConnectModal";
+import { useWalletConnect } from "../../hooks/useWalletConnect";
 
 
 export default function Header() {
   const [activeClass, setActiveClass] = useState(false);
-  const { account, onConnect, onDisconnect } = useWalletConnectModal();
+  const { account, onConnect, onDisconnect } = useWalletConnect();
   console.log(account);
   
   const navClass = activeClass ? "navbar-active" : "navbar";

@@ -4,11 +4,11 @@ import * as constants from "../constants/consts";
 import NFT_ABI from "../abi/nft-contract-abi.json";
 import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
-import { useWalletConnectModal } from "./useWalletConnectModal";
+import { useWalletConnect } from "./useWalletConnect";
 
 
 function walletOfOwner(contract: Contract | null) {
-    const { account } = useWalletConnectModal();
+    const { account } = useWalletConnect();
 
 
     return async (_: number[]) => {

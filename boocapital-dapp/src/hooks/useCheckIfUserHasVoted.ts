@@ -4,11 +4,11 @@ import * as constants from "../constants/consts";
 import VOTE_ABI from "../abi/vote-contract-abi.json";
 import useGetContract from "./useGetContract";
 import useKeepDataLiveWithBlocks from "./useKeepDataLiveWithBlocks";
-import { useWalletConnectModal } from "./useWalletConnectModal";
+import { useWalletConnect } from "./useWalletConnect";
 
 
 function checkIsContestVoter(contract: Contract | null, contestId: number | null) {
-    const { account } = useWalletConnectModal();
+    const { account } = useWalletConnect();
 
     return async (_: boolean) => {
         const hasVoted = <boolean>contract?.methods.checkIsContestVoter(contestId, account).call();

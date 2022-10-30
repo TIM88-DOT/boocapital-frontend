@@ -163,6 +163,18 @@
     line-break: auto;
 }
 
+.boo-container {
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+
+.boo-balance {
+    color: #fff;
+    margin-inline: 5px;
+}
+
+
 @media screen and (max-width: 1030px) {
     .right {
         margin-top: 7%;
