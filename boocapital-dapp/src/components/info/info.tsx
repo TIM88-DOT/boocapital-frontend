@@ -24,6 +24,7 @@ export default function Info() {
     if (hasVoted) {
       hasVoted ? (tokenVotePower = 0) : (tokenVotePower = 1);
     }
+    
     if (nftBalance) {
       setTotalVotingPower(nftBalance.length + tokenVotePower);
     }
@@ -61,17 +62,32 @@ export default function Info() {
               )}
               renderThumb={({ props }) => (
                 <div
-                  {...props}
+                {...props}
+                style={{
+                  ...props.style,
+                  height: "42px",
+                  width: "42px",
+                  backgroundColor: "transparent",
+                  background: `url(${logo})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div
                   style={{
-                    ...props.style,
-                    height: "42px",
-                    width: "42px",
-                    backgroundColor: "transparent",
-                    background: `url(${logo})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
+                    position: 'absolute',
+                    bottom: '-25px',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
+                    backgroundColor: 'transparent'
                   }}
-                />
+                >
+                  {currentBooWalletBalance}
+                </div>
+
+              </div>
+            
               )}
             />
             <div className={classes["boo-balance"]}>
