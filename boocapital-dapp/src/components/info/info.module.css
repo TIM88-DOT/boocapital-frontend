@@ -221,6 +221,11 @@
         font-size: 1em;
     }
 
+    #booLogo {
+        height: 30px!important;
+        width: 30px!important;
+    }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -242,5 +247,10 @@
 
     .item:nth-child(3) h4 {
         font-size: 7px;
+    }
+
+    #booLogo {
+        height: 21px!important;
+        width: 21px!important;
     }
 }

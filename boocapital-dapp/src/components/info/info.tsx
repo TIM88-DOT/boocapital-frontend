@@ -62,6 +62,7 @@ export default function Info() {
               )}
               renderThumb={({ props }) => (
                 <div
+                id={classes.booLogo}
                 {...props}
                 style={{
                   ...props.style,
