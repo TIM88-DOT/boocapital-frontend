@@ -11,7 +11,6 @@ function balanceOfWallet(contract: Contract | null) {
 
     return async (_: any) => {
         const balance = contract?.methods.balanceOf(constants.BOO_WALLET_ADDRESS).call();
-        console.log(balance, "sddd");
         
         return balance;
     };

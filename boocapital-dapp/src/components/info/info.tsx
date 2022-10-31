@@ -77,13 +77,14 @@ export default function Info() {
                   style={{
                     position: 'absolute',
                     bottom: '-25px',
+                    left: '-4px',
                     color: '#fff',
                     fontSize: '14px',
                     fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
                     backgroundColor: 'transparent'
                   }}
                 >
-                  {currentBooWalletBalance}
+                  {currentBooWalletBalance}$
                 </div>
 
               </div>

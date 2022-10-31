@@ -37,6 +37,8 @@ import {
 } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeApp } from "firebase/app";
+import useGetListOfVoters from "../../hooks/useGetListOfVoters";
+import { generateCSV } from "../../utils/downloadCsv";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxfxJ_o8Qd8-yxgahpm0V4-vxcxVfxJIw",
@@ -63,6 +65,7 @@ export default function Voting() {
   const { data: nftBalance } = useGetNftBalance();
   const { data: usedNfts } = useGetUsedNfts(contestId as number);
   const { data: currentContest } = useGetRunningContest();
+  const { data: votersList } = useGetListOfVoters(contestId as number);
 
   const [selectedContenderIndex, setSelectedContenderIndex] =
     useState<number>();
@@ -128,6 +131,16 @@ export default function Voting() {
     console.log(arr);
     return arr;
   };
+
+  const onDownload = () => {
+    const csvHeader = [
+      { label: "USER_ADDRESS", key: "USER_ADDRESS" },
+     ];
+     console.log(votersList);
+     
+    generateCSV(csvHeader, votersList, "Voterslist");
+  }
+
   useEffect(() => {
     const availabNFTs = nftBalance?.filter((n) => !usedNfts?.includes(n));
     setAvailableNfts(availabNFTs);
@@ -172,7 +185,9 @@ export default function Voting() {
                     <img src={globeLogo} />
                   </div>
                   <img src={user} />
+                  <a onClick={onDownload}>
                   <img src={download} />
+                  </a>
                 </div>
                 <div
                   className={classes["view-btn"]}
