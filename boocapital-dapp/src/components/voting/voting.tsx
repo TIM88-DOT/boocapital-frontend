@@ -26,7 +26,6 @@ import download from "../../assets/images/download.png";
 import ListItemText from "@mui/material/ListItemText";
 import { List, ListItem, ListItemButton } from "@mui/material";
 
-
 import {
   getFirestore,
   collection,
@@ -56,10 +55,12 @@ const contendersRef = collection(db, "contenders");
 
 export default function Voting() {
   const [open, setOpen] = useState(false);
+  const [openVoters, setOpenVoters] = useState(false);
   const [checked, setChecked] = useState<number[]>([]);
   const [availableNfts, setAvailableNfts] = useState<number[] | undefined>([]);
   const [contestId, setContestId] = useState<number>();
   const [contenders, setContenders] = useState<Contender[] | undefined>([]);
+  const [voters, setVoters] = useState<[any, any][]>([]);
 
   const { account } = useWalletConnect();
   const { data: nftBalance } = useGetNftBalance();
@@ -118,6 +119,7 @@ export default function Voting() {
     setSelectedContenderIndex(selectedContender);
     setOpen(true);
   };
+
   const onVote = async () => {
     await voteContract?.methods.vote(selectedContenderIndex, checked).send({
       from: account,
@@ -126,20 +128,23 @@ export default function Voting() {
     setOpen(false);
   };
 
+  const onOpenVotersList = () => {
+    setOpenVoters(true);
+  };
+
   const getData = (contenderId: string) => {
     const arr = contenderDetails?.find((r) => contenderId == r.id) as Contender;
-    console.log(arr);
+    //console.log(arr);
     return arr;
   };
 
   const onDownload = () => {
-    const csvHeader = [
-      { label: "USER_ADDRESS", key: "USER_ADDRESS" },
-     ];
-     console.log(votersList);
-     
-    generateCSV(csvHeader, votersList, "Voterslist");
-  }
+    const csvHeader = [{ label: "User Address", key: "USER_ADDRESS" },
+    { label: "Votes", key: "VOTES" },];
+    console.log(voters);
+
+    generateCSV(csvHeader, voters, "Voterslist");
+  };
 
   useEffect(() => {
     const availabNFTs = nftBalance?.filter((n) => !usedNfts?.includes(n));
@@ -152,6 +157,17 @@ export default function Voting() {
 
     setContenders(currentContenders);
   }, [currentContest]);
+
+  useEffect(() => {
+    const map = votersList?.reduce(
+      (acc, e) => acc.set(e, (acc.get(e) || 0) + 1),
+      new Map()
+    );
+    if (map) {
+      setVoters([...map.entries()]);
+      console.info("aa", [...map.entries()]);
+    }
+  }, [votersList]);
 
   return (
     <>
@@ -184,9 +200,11 @@ export default function Voting() {
                   <div>
                     <img src={globeLogo} />
                   </div>
-                  <img src={user} />
+                  <a onClick={onOpenVotersList}>
+                    <img src={user} />
+                  </a>
                   <a onClick={onDownload}>
-                  <img src={download} />
+                    <img src={download} />
                   </a>
                 </div>
                 <div
@@ -250,6 +268,46 @@ export default function Voting() {
                   >
                     <a>Confirm</a>
                   </div>
+                </Box>
+              </Fade>
+            </Modal>
+
+            <Modal
+              open={openVoters}
+              onClose={() => setOpenVoters(false)}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={openVoters}>
+                <Box sx={style}>
+                  <h4 style={{ width: "100%", marginBlock: "0" }}>
+                    All voters :
+                  </h4>
+                  <List
+                    sx={{
+                      width: "100%",
+                      maxWidth: 360,
+                      bgcolor: "background.paper",
+                    }}
+                  >
+                    {voters?.map((value) => {
+                      const labelId = `checkbox-list-label-${value[0]}`;
+
+                      return (
+                        <ListItem disablePadding>
+                          <ListItemButton role={undefined} dense>
+                            <ListItemText
+                              id={labelId}
+                              primary={value[0] +","+ value[1]}
+                            />
+                          </ListItemButton>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
                 </Box>
               </Fade>
             </Modal>

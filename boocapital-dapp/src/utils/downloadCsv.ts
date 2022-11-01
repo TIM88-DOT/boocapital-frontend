@@ -6,13 +6,14 @@ const arrayToCsv = (headers: any, data: any) => {
     csvRows.push(headerValues.join(',')); // Push into array as comma separated values
     // Getting rows. 
     for (const row of data) {
-        console.log("1",data);
-        const rowValues = `"${row}"`;
-        console.log("2",rowValues);
-        csvRows.push(rowValues +','); // Push into array as comma separated values. 
+        console.log("1",row);
+        const rowValues = `"${row[0] +','+ row[1]}"`;
+        csvRows.push(rowValues); // Push into array as comma separated values. 
     }
     return csvRows.join('\n'); // To enter the next rows in the new line '\n' 
 };
+
+
 // Function to download the generated CSV as a .csv file.
 const download = (data: any, fileName: any) => {
     const blob = new Blob([data], { type: 'text/csv' });
